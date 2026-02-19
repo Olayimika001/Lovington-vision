@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === 'true' ? `/${process.env.BASE_PATH || 'Lovington-vision'}/` : '/',
   plugins: [vue()],
   resolve: {
     alias: {

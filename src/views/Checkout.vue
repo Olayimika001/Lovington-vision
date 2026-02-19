@@ -154,7 +154,7 @@ function placeOrder() {
 <style scoped>
 .checkout-success { padding: var(--space-xl) 0; min-height: 50vh; display: flex; align-items: center; }
 .success-card { text-align: center; max-width: 480px; margin: 0 auto; background: white; padding: var(--space-xl); border-radius: var(--border-radius); box-shadow: var(--shadow-strong); }
-.success-icon { font-size: 4rem; color: var(--leaf-green); margin-bottom: var(--space-md); }
+.success-icon { font-size: 4rem; color: var(--primary); margin-bottom: var(--space-md); }
 .success-card h1 { margin-bottom: var(--space-sm); }
 .success-card p { margin-bottom: var(--space-lg); color: var(--earth-600); }
 .checkout-empty { padding: var(--space-xl) 0; text-align: center; }

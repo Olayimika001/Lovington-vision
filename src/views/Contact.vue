@@ -4,8 +4,6 @@
       :image="heroImages.contact"
       :title="t('nav.contact')"
       :description="t('contact.intro')"
-      :primary-cta-text="t('contact.sendMessage')"
-      primary-cta-to="#contact-form"
     />
     <div id="contact-form" class="container contact-wrap">
       <div class="contact-grid">
@@ -115,9 +113,10 @@ function submitForm() {
   padding: var(--space-lg);
 }
 .contact-info-title {
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--earth-900);
+  color: var(--text);
   margin: 0 0 var(--space-sm);
 }
 .contact-info-intro {
@@ -139,10 +138,10 @@ function submitForm() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--leaf-green);
+  color: var(--primary);
 }
 .contact-detail-text { display: flex; flex-direction: column; gap: 0.25rem; }
-.contact-detail-label { font-size: 0.9375rem; color: var(--earth-900); font-weight: 600; }
+.contact-detail-label { font-size: 0.9375rem; color: var(--text); font-weight: 600; }
 .contact-detail-value { font-size: 0.9375rem; color: var(--earth-600); }
 .contact-detail-divider {
   height: 1px;
@@ -153,7 +152,7 @@ function submitForm() {
 /* Right: Form */
 .contact-form-block { min-width: 0; }
 .success-message {
-  color: var(--leaf-green);
+  color: var(--primary);
   font-weight: 600;
   padding: var(--space-md);
   background: var(--sand);
@@ -198,10 +197,11 @@ function submitForm() {
 .btn-send {
   padding: 0.65rem 2rem;
   font-weight: 600;
-  background: var(--deep-forest);
-  border-color: var(--deep-forest);
+  background: var(--accent);
+  color: var(--text);
+  border: 2px solid var(--accent);
 }
-.btn-send:hover { background: var(--earth-900); border-color: var(--earth-900); }
+.btn-send:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: var(--text); }
 
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr; }

@@ -66,12 +66,12 @@ function addToCart() {
 
 <style scoped>
 .product-card {
-  background: white;
+  background: var(--cream);
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: all 0.4s ease;
   box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(45, 106, 79, 0.1);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -81,12 +81,12 @@ function addToCart() {
 .product-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .placeholder-image {
   width: 100%; height: 100%;
-  background: linear-gradient(135deg, var(--sand), var(--harvest-gold));
+  background: linear-gradient(135deg, var(--sand), var(--accent));
   display: flex; align-items: center; justify-content: center; font-size: 4rem;
 }
 .out-of-stock-badge {
   position: absolute; top: 1rem; right: 1rem;
-  background: var(--clay-terracotta); color: white; padding: 0.4rem 0.8rem;
+  background: var(--secondary); color: white; padding: 0.4rem 0.8rem;
   border-radius: var(--border-radius); font-size: 0.85rem; font-weight: 600;
 }
 .product-info {
@@ -97,13 +97,15 @@ function addToCart() {
   min-width: 0;
 }
 .product-info h3 {
+  font-family: var(--font-display);
   font-size: 1.2rem;
   margin: 0 0 0.5rem 0;
   line-height: 1.3;
   word-wrap: break-word;
+  color: var(--text);
 }
 .product-description {
-  color: var(--earth-600);
+  color: var(--text-muted);
   font-size: 0.9rem;
   line-height: 1.55;
   margin: 0 0 1rem 0;
@@ -128,14 +130,14 @@ function addToCart() {
 .price {
   font-size: clamp(1.25rem, 3.5vw, 1.6rem);
   font-weight: 700;
-  color: var(--leaf-green);
+  color: var(--primary);
   letter-spacing: -0.02em;
   word-break: break-word;
   line-height: 1.2;
 }
 .unit {
   font-size: 0.8rem;
-  color: var(--earth-600);
+  color: var(--text-muted);
 }
 .add-to-cart {
   padding: 0.6rem 1rem;

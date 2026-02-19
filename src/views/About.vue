@@ -4,37 +4,37 @@
       :image="heroImages.about"
       :title="t('about.title')"
       :description="t('about.subtitle')"
-      :secondary-cta-text="t('nav.contact')"
-      secondary-cta-to="/contact"
     />
 
     <div class="container about-content">
-      <section class="about-section" aria-labelledby="farm-heading">
-        <h2 id="farm-heading" class="about-heading">{{ t('about.farmTitle') }}</h2>
-        <div class="about-prose">
-          <p>{{ t('about.farmText') }}</p>
-          <p>{{ t('about.farmText2') }}</p>
-        </div>
-      </section>
+      <div class="about-cards">
+        <article class="about-card" aria-labelledby="farm-heading">
+          <h2 id="farm-heading" class="about-card-title">{{ t('about.farmTitle') }}</h2>
+          <div class="about-card-body">
+            <p>{{ t('about.farmText') }}</p>
+            <p>{{ t('about.farmText2') }}</p>
+          </div>
+        </article>
 
-      <section class="about-section" aria-labelledby="consult-heading">
-        <h2 id="consult-heading" class="about-heading">{{ t('about.consultTitle') }}</h2>
-        <div class="about-prose">
-          <p>{{ t('about.consultText') }}</p>
-          <p>{{ t('about.consultText2') }}</p>
-        </div>
-      </section>
+        <article class="about-card" aria-labelledby="consult-heading">
+          <h2 id="consult-heading" class="about-card-title">{{ t('about.consultTitle') }}</h2>
+          <div class="about-card-body">
+            <p>{{ t('about.consultText') }}</p>
+            <p>{{ t('about.consultText2') }}</p>
+          </div>
+        </article>
 
-      <section class="about-section" aria-labelledby="mission-heading">
-        <h2 id="mission-heading" class="about-heading">{{ t('about.missionTitle') }}</h2>
-        <div class="about-prose">
-          <p>{{ t('about.missionText1') }}</p>
-          <p>{{ t('about.missionText2') }}</p>
-        </div>
-      </section>
+        <article class="about-card" aria-labelledby="mission-heading">
+          <h2 id="mission-heading" class="about-card-title">{{ t('about.missionTitle') }}</h2>
+          <div class="about-card-body">
+            <p>{{ t('about.missionText1') }}</p>
+            <p>{{ t('about.missionText2') }}</p>
+          </div>
+        </article>
+      </div>
 
       <section class="values-section" aria-labelledby="values-heading">
-        <h2 id="values-heading" class="about-heading values-heading">{{ t('about.values') }}</h2>
+        <h2 id="values-heading" class="values-heading">{{ t('about.values') }}</h2>
         <div class="values-grid">
           <article class="value-card" v-for="value in values" :key="value.titleKey">
             <div class="value-icon" aria-hidden="true">{{ value.icon }}</div>
@@ -65,67 +65,87 @@ const values = [
 <style scoped>
 .about-content {
   padding: var(--space-xl) var(--space-md);
-  max-width: 820px;
-  margin: 0 auto;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
-.about-section {
+/* Main content cards - spread across page */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
   margin-bottom: var(--space-xl);
+}
+
+.about-card {
+  background: var(--cream);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(45, 106, 79, 0.1);
+  display: flex;
+  flex-direction: column;
   scroll-margin-top: 5rem;
 }
 
-.about-heading {
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+.about-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
   font-weight: 700;
-  color: var(--earth-900);
+  color: var(--text);
   margin: 0 0 var(--space-md);
   line-height: 1.3;
 }
 
-.about-prose {
-  color: var(--earth-700);
+.about-card-body {
+  color: var(--text-muted);
   line-height: 1.75;
-  font-size: clamp(0.9375rem, 1.5vw, 1rem);
+  font-size: clamp(0.9375rem, 1.2vw, 1rem);
+  flex: 1;
 }
 
-.about-prose p {
+.about-card-body p {
   margin: 0 0 var(--space-md);
 }
 
-.about-prose p:last-child {
+.about-card-body p:last-child {
   margin-bottom: 0;
 }
 
-/* Values */
+/* Values section */
 .values-section {
-  margin-top: var(--space-xl);
+  margin-top: 0;
   margin-bottom: 0;
 }
 
 .values-heading {
+  font-family: var(--font-display);
   text-align: center;
-  margin-bottom: var(--space-lg);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-lg);
 }
 
 .values-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
-  margin-top: 0;
+  gap: var(--space-lg);
 }
 
 .value-card {
-  background: var(--sand);
+  background: var(--cream);
   padding: var(--space-lg);
   border-radius: var(--border-radius);
   text-align: center;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(45, 106, 79, 0.1);
+  box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 160px;
+  min-height: 0;
 }
 
 .value-icon {
@@ -135,15 +155,16 @@ const values = [
 }
 
 .value-card h3 {
+  font-family: var(--font-display);
   font-size: clamp(1rem, 1.5vw, 1.1rem);
   font-weight: 600;
-  color: var(--earth-900);
+  color: var(--text);
   margin: 0 0 0.35rem;
 }
 
 .value-card p {
   font-size: clamp(0.8125rem, 1.2vw, 0.9rem);
-  color: var(--earth-600);
+  color: var(--text-muted);
   margin: 0;
   line-height: 1.5;
   flex: 1;
@@ -151,17 +172,15 @@ const values = [
 
 /* Responsive */
 @media (max-width: 992px) {
-  .about-content {
-    padding: var(--space-lg) var(--space-md);
+  .about-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
   }
 
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
-  }
-
-  .value-card {
-    min-height: 140px;
   }
 }
 
@@ -170,20 +189,17 @@ const values = [
     padding: var(--space-lg) var(--space-sm);
   }
 
-  .about-section {
+  .about-cards {
+    gap: var(--space-md);
     margin-bottom: var(--space-lg);
   }
 
-  .about-heading {
-    margin-bottom: var(--space-sm);
-  }
-
-  .about-prose p {
-    margin-bottom: var(--space-sm);
+  .about-card {
+    padding: var(--space-md);
   }
 
   .values-section {
-    margin-top: var(--space-lg);
+    margin-top: var(--space-md);
   }
 
   .values-heading {
@@ -192,11 +208,10 @@ const values = [
 
   .values-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
 
   .value-card {
-    min-height: auto;
     padding: var(--space-md);
     flex-direction: row;
     text-align: left;
@@ -216,11 +231,15 @@ const values = [
 
 @media (max-width: 480px) {
   .about-content {
-    padding: var(--space-md) var(--space-sm);
+    padding: var(--space-md) var(--space-xs);
   }
 
-  .about-prose {
+  .about-card-body {
     font-size: 0.9375rem;
+  }
+
+  .values-grid {
+    gap: var(--space-sm);
   }
 }
 </style>

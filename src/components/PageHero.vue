@@ -84,15 +84,15 @@ const titleParts = computed(() =>
   justify-content: center;
   background-size: cover;
   background-position: center;
-  background-color: var(--deep-forest);
+  background-color: var(--primary);
 }
 .page-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(4, 120, 87, 0.82) 0%,
-    rgba(15, 23, 42, 0.72) 100%
+    rgba(45, 106, 79, 0.88) 0%,
+    rgba(28, 28, 28, 0.75) 100%
   );
 }
 .page-hero-content {
@@ -113,7 +113,7 @@ const titleParts = computed(() =>
   margin: 0 0 var(--space-sm);
 }
 .page-hero-title {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-size: clamp(1.85rem, 4.5vw, 2.75rem);
   font-weight: 700;
   line-height: 1.2;
@@ -121,7 +121,7 @@ const titleParts = computed(() =>
   color: white;
 }
 .page-hero-title-accent {
-  color: #d4a574;
+  color: var(--accent);
 }
 .page-hero-description {
   font-size: 1.05rem;
@@ -136,9 +136,9 @@ const titleParts = computed(() =>
   flex-wrap: wrap;
 }
 .btn-hero-primary {
-  background: var(--deep-forest);
-  color: white;
-  border: 2px solid var(--deep-forest);
+  background: var(--accent);
+  color: var(--text);
+  border: 2px solid var(--accent);
   padding: 0.65rem 1.5rem;
   border-radius: var(--border-radius);
   font-weight: 600;
@@ -146,13 +146,15 @@ const titleParts = computed(() =>
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-hero-primary:hover {
+  background: var(--accent-dark);
+  color: var(--text);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 .btn-hero-secondary {
-  background: white;
-  color: var(--deep-forest);
-  border: 2px solid var(--deep-forest);
+  background: transparent;
+  color: white;
+  border: 2px solid white;
   padding: 0.65rem 1.5rem;
   border-radius: var(--border-radius);
   font-weight: 600;
@@ -160,6 +162,7 @@ const titleParts = computed(() =>
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }

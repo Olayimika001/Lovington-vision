@@ -33,12 +33,15 @@
             <option value="NGN">{{ t('common.currencyNGN') }}</option>
           </select>
         </div>
-        <div class="language-switcher">
-          <button type="button" @click="switchLocale('en')" :class="{ active: locale === 'en' }" class="lang-btn" aria-label="English">EN</button>
-          <button type="button" @click="switchLocale('yo')" :class="{ active: locale === 'yo' }" class="lang-btn" aria-label="Yorùbá">YO</button>
+        <div class="language-switcher" role="group" aria-label="Select language">
+          <button type="button" @click="switchLocale('en')" :class="{ active: locale === 'en' }" class="lang-btn" aria-label="English" :aria-pressed="locale === 'en'">EN</button>
+          <button type="button" @click="switchLocale('yo')" :class="{ active: locale === 'yo' }" class="lang-btn" aria-label="Yorùbá" :aria-pressed="locale === 'yo'">YO</button>
         </div>
         <button type="button" @click="cartStore.toggleCart()" class="cart-btn" :aria-label="t('nav.cart')">
-          🛒
+          <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
           <span v-if="cartStore.itemCount > 0" class="cart-badge">{{ cartStore.itemCount }}</span>
         </button>
         <button type="button" @click="toggleMobileMenu" class="mobile-toggle" aria-label="Toggle menu" :aria-expanded="mobileMenuOpen">
@@ -78,9 +81,9 @@ function closeMobileMenu() {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(250, 243, 224, 0.98);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(45, 106, 79, 0.15);
   box-shadow: var(--shadow-soft);
 }
 .nav-content {
@@ -128,11 +131,11 @@ function closeMobileMenu() {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--leaf-green);
+  background: var(--primary);
   transition: width 0.3s ease;
 }
 .nav-links a:hover,
-.nav-links a.router-link-active { color: var(--leaf-green); }
+.nav-links a.router-link-active { color: var(--primary); }
 .nav-links a:hover::after,
 .nav-links a.router-link-active::after { width: 100%; }
 .nav-actions {
@@ -143,7 +146,7 @@ function closeMobileMenu() {
 }
 .currency-select {
   padding: 0.5rem 0.6rem;
-  border: 1px solid rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(45, 106, 79, 0.2);
   border-radius: var(--border-radius);
   font-family: var(--font-body);
   font-size: clamp(0.8rem, 1.5vw, 0.85rem);
@@ -151,44 +154,60 @@ function closeMobileMenu() {
   cursor: pointer;
   min-height: 40px;
 }
-.language-switcher { display: flex; gap: 0.25rem; background: var(--sand); padding: 0.25rem; border-radius: var(--border-radius); }
+.language-switcher {
+  display: flex;
+  gap: 2px;
+  background: var(--sand);
+  padding: 3px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(45, 106, 79, 0.12);
+}
 .lang-btn {
   padding: 0.5rem 0.75rem;
-  min-width: 44px;
-  min-height: 40px;
+  min-width: 42px;
+  min-height: 38px;
   border: none;
   background: transparent;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  border-radius: var(--border-radius);
-  color: var(--earth-700);
+  border-radius: 6px;
+  color: var(--text-muted);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.2s, color 0.2s;
 }
-.lang-btn.active { background: white; color: var(--leaf-green); box-shadow: var(--shadow-soft); }
+.lang-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.6); }
+.lang-btn.active { background: var(--cream); color: var(--primary); box-shadow: var(--shadow-soft); }
 .cart-btn {
   position: relative;
-  background: var(--leaf-green);
+  background: var(--accent);
+  color: var(--text);
   border: none;
-  padding: 0.5rem 0.875rem;
+  padding: 0.5rem 0.75rem;
   min-width: 44px;
   min-height: 44px;
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 1.2rem;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
-.cart-btn:hover { background: var(--deep-forest); transform: translateY(-2px); }
+.cart-btn:hover { background: var(--accent-dark); color: var(--text); transform: translateY(-2px); }
+.cart-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+}
 .cart-badge {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: var(--clay-terracotta);
+  background: var(--secondary);
   color: white;
   font-size: 0.7rem;
   font-weight: 700;
@@ -211,13 +230,13 @@ function closeMobileMenu() {
   justify-content: center;
   border-radius: var(--border-radius);
 }
-.mobile-toggle span { width: 22px; height: 2.5px; background: var(--earth-700); border-radius: 2px; }
-.mobile-toggle:hover span { background: var(--earth-900); }
+.mobile-toggle span { width: 22px; height: 2.5px; background: var(--text-muted); border-radius: 2px; }
+.mobile-toggle:hover span { background: var(--text); }
 .nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(28, 28, 28, 0.4);
   z-index: 999;
   border: none;
   cursor: pointer;
@@ -233,7 +252,7 @@ function closeMobileMenu() {
     right: 0;
     z-index: 1000;
     flex-direction: column;
-    background: white;
+    background: var(--cream);
     padding: var(--space-lg);
     gap: 0;
     transform: translateY(-120%);
@@ -244,7 +263,7 @@ function closeMobileMenu() {
   }
   .nav-links a {
     padding: 1rem 0;
-    border-bottom: 1px solid var(--earth-400);
+    border-bottom: 1px solid rgba(45, 106, 79, 0.15);
     width: 100%;
     text-align: center;
     font-size: 1rem;
@@ -270,7 +289,7 @@ function closeMobileMenu() {
   .nav-content { padding: 0.5rem var(--space-xs); gap: 0.25rem; min-height: 52px; }
   .nav-links { top: 52px; max-height: calc(100vh - 52px); }
   .logo-main { font-size: 1rem; }
-  .currency-switcher { display: none; }
+  .currency-select { padding: 0.35rem 0.4rem; font-size: 0.75rem; min-height: 34px; }
   .lang-btn { min-width: 36px; min-height: 36px; padding: 0.35rem; font-size: 0.8rem; }
   .cart-btn { min-width: 36px; min-height: 36px; padding: 0.4rem; font-size: 1rem; }
   .mobile-toggle { min-width: 36px; min-height: 36px; }

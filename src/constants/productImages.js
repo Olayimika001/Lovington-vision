@@ -1,16 +1,22 @@
 /**
- * Product image URLs – real farm produce.
- * Pexels (Pexels License). Replace with your own assets (e.g. /products/tomatoes.jpg) if needed.
+ * Product images from /public/images. Paths with spaces are URL-encoded.
+ * Add herbs.jpg and palm-oil.jpg to /public/images when you have them (Bitter Leaf, Palm Oil).
  */
-const P = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600`
+function local(path) {
+  const full = path.startsWith('/') ? path : `/images/${path}`
+  return encodeURI(full)
+}
 
 export const productImages = {
-  tomatoes: P(4197907),   // tomatoes in bowl
-  okra: P(616404),        // assorted vegetables
-  plantains: P(2132169),   // bananas/plantains
-  yam: P(1410235),        // sweet potato / root vegetable
-  herbs: P(1438672),      // fresh herbs
-  palmOil: P(257816),      // oil / liquid
-  seeds: P(1417945),      // seeds / grains
-  peppers: P(1400172),    // variety vegetables incl peppers
+  tomatoes: local('organic-tomatoes.jpg'),
+  okra: local('fresh okra.jpg'),
+  plantains: local('plantain.jpg'),
+  yam: local('yam.jpg'),
+  herbs: local('herbs.jpg'),
+  palmOil: local('palm-oil.jpg'),
+  seeds: local('seeds.jpg'),
+  peppers: local('peppers.jpg'),
+  smokedCatfish: local('smoked fish.jpg'),
+  chicken: local('chicken.jpg'),
+  goat: local('Goat meat.jpg'),
 }

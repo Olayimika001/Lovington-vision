@@ -9,7 +9,7 @@
         </div>
         <div v-if="cartStore.items.length === 0" class="cart-empty">
           <p>{{ t('cart.empty') }}</p>
-          <button type="button" @click="cartStore.toggleCart()" class="btn btn-primary">{{ t('cart.continueShopping') }}</button>
+          <RouterLink to="/shop" class="btn btn-primary" @click="cartStore.toggleCart()">{{ t('cart.continueShopping') }}</RouterLink>
         </div>
         <div v-else class="cart-content">
           <div class="cart-items">
@@ -76,14 +76,14 @@ const imageErrors = reactive({})
 .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1rem; padding: 1rem; background: white; border-radius: var(--border-radius); margin-bottom: 1rem; box-shadow: var(--shadow-soft); }
 .item-image { width: 80px; height: 80px; border-radius: var(--border-radius); overflow: hidden; background: var(--sand); flex-shrink: 0; }
 .item-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.placeholder-image { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sand), var(--harvest-gold)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+.placeholder-image { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sand), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
 .item-details h4 { font-size: 1rem; margin: 0 0 0.25rem 0; }
 .item-price { color: var(--earth-600); font-size: 0.95rem; margin: 0 0 0.5rem 0; }
 .quantity-controls { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
 .quantity-controls button { width: 28px; height: 28px; border: 1px solid var(--earth-400); background: white; border-radius: var(--border-radius); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
-.quantity-controls button:hover { background: var(--leaf-green); color: white; border-color: var(--leaf-green); }
+.quantity-controls button:hover { background: var(--primary); color: white; border-color: var(--primary); }
 .item-actions { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; }
-.remove-btn { background: none; border: none; color: var(--clay-terracotta); cursor: pointer; font-size: 0.85rem; text-decoration: underline; padding: 0; }
+.remove-btn { background: none; border: none; color: var(--secondary); cursor: pointer; font-size: 0.85rem; text-decoration: underline; padding: 0; }
 .item-total { font-weight: 700; font-size: 1.1rem; }
 .cart-summary { padding: var(--space-md); background: white; border-top: 1px solid rgba(15,23,42,0.08); }
 .summary-row { display: flex; justify-content: space-between; padding: 0.75rem 0; }

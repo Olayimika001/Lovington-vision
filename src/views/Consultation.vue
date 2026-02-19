@@ -4,8 +4,6 @@
       :image="heroImages.consultation"
       :title="t('consultation.title')"
       :description="t('consultation.subtitle')"
-      :primary-cta-text="t('consultation.bookSession')"
-      primary-cta-to="#availability"
     />
 
     <div class="container consultation-content">
@@ -252,9 +250,10 @@ function submitBooking() {
 }
 
 .section-heading {
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--earth-900);
+  color: var(--text);
   margin: 0 0 var(--space-md);
   text-align: center;
 }
@@ -303,8 +302,8 @@ function submitBooking() {
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: var(--leaf-green);
-  color: white;
+  background: var(--accent);
+  color: var(--text);
   border-radius: 50%;
   font-weight: 700;
   flex-shrink: 0;

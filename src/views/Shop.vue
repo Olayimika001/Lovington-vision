@@ -4,8 +4,6 @@
       :image="heroImages.shop"
       :title="t('shop.title')"
       :description="t('shop.subtitle')"
-      :primary-cta-text="t('common.learnMore')"
-      primary-cta-to="#products"
     />
 
     <div id="products" class="shop-main">
@@ -81,7 +79,7 @@ const currentCategoryNameYo = computed(() => {
 </script>
 
 <style scoped>
-.shop-main { background: var(--warm-white); padding: var(--space-xl) 0; }
+.shop-main { background: var(--background); padding: var(--space-xl) 0; }
 .shop-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -125,11 +123,11 @@ const currentCategoryNameYo = computed(() => {
   transition: background 0.2s, color 0.2s;
   border-left: 3px solid transparent;
 }
-.category-btn:hover { background: var(--sand); color: var(--earth-900); }
+.category-btn:hover { background: var(--sand); color: var(--text); }
 .category-btn.active {
-  background: var(--leaf-green);
+  background: var(--primary);
   color: white;
-  border-left-color: var(--deep-forest);
+  border-left-color: var(--primary);
   font-weight: 600;
 }
 .category-btn-text { display: block; }
@@ -178,7 +176,7 @@ const currentCategoryNameYo = computed(() => {
   .shop-sidebar { position: static; }
   .category-nav { flex-direction: row; flex-wrap: wrap; }
   .category-btn { width: auto; padding: 0.5rem 1rem; font-size: 0.9375rem; border-left: none; border-bottom: 3px solid transparent; }
-  .category-btn.active { border-left: none; border-bottom-color: var(--deep-forest); }
+  .category-btn.active { border-left: none; border-bottom-color: var(--primary); }
   .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-md); }
 }
 </style>

@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <!-- 3. Bottom bar: copyright, social, scroll-to-top -->
+    <!-- 3. Bottom bar: copyright, social -->
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <div class="footer-copyright">
@@ -82,14 +82,6 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
           </div>
-          <button
-            type="button"
-            class="scroll-to-top"
-            aria-label="Scroll to top"
-            @click="scrollToTop"
-          >
-            ↑
-          </button>
         </div>
       </div>
     </div>
@@ -108,10 +100,6 @@ const newsletterSubmitted = ref(false)
 function submitNewsletter() {
   newsletterSubmitted.value = true
 }
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
 </script>
 
 <style scoped>
@@ -121,17 +109,17 @@ function scrollToTop() {
 
 /* 1. Newsletter strip - light background */
 .footer-newsletter-strip {
-  background: var(--warm-white);
-  border-top: 1px solid var(--earth-400);
+  background: var(--background);
+  border-top: 1px solid rgba(45, 106, 79, 0.15);
   padding: var(--space-xl) 0;
 }
 .newsletter-inner {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: var(--space-xl);
   flex-wrap: wrap;
-  text-align: center;
+  text-align: left;
 }
 .newsletter-text {
   flex: 0 1 auto;
@@ -139,9 +127,10 @@ function scrollToTop() {
   max-width: 100%;
 }
 .newsletter-title {
+  font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--earth-900);
+  color: var(--text);
   letter-spacing: 0.02em;
   margin: 0 0 var(--space-sm) 0;
 }
@@ -165,7 +154,7 @@ function scrollToTop() {
 }
 .newsletter-input {
   padding: 0.75rem 1rem;
-  border: 2px solid var(--leaf-green);
+  border: 2px solid var(--primary);
   border-right: none;
   border-radius: var(--border-radius) 0 0 var(--border-radius);
   font-size: 1rem;
@@ -176,13 +165,13 @@ function scrollToTop() {
 }
 .newsletter-input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.25);
 }
 .btn-newsletter {
   padding: 0.75rem 1.5rem;
-  background: var(--leaf-green);
-  color: white;
-  border: 2px solid var(--leaf-green);
+  background: var(--accent);
+  color: var(--text);
+  border: 2px solid var(--accent);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   font-weight: 600;
   font-size: 1rem;
@@ -191,11 +180,12 @@ function scrollToTop() {
   transition: background 0.2s, color 0.2s;
 }
 .btn-newsletter:hover {
-  background: var(--deep-forest);
-  border-color: var(--deep-forest);
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: var(--text);
 }
 .newsletter-success {
-  color: var(--leaf-green);
+  color: var(--primary);
   font-weight: 600;
   margin: 0;
 }
@@ -208,6 +198,7 @@ function scrollToTop() {
   .newsletter-inner {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
   }
   .newsletter-desc {
@@ -219,42 +210,48 @@ function scrollToTop() {
     max-width: 420px;
   }
   .newsletter-input {
-    border-right: 2px solid var(--leaf-green);
+    border-right: 2px solid var(--primary);
     border-radius: var(--border-radius);
     min-width: 0;
     max-width: none;
   }
   .btn-newsletter {
     border-radius: var(--border-radius);
-    border-left: 2px solid var(--leaf-green);
+    border-left: 2px solid var(--primary);
   }
 }
 
-/* 2. Main footer - dark background, columns */
+/* 2. Main footer - deep forest green, columns */
 .footer-main {
-  background: var(--earth-900);
+  background: var(--primary);
   color: var(--cream);
   padding: var(--space-xl) 0;
-
 }
 .footer-content {
-  display: grid;
-  grid-template-columns: 1.2fr repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: var(--space-lg);
-  justify-items: center;
+  align-items: start;
 }
 @media (max-width: 1024px) {
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    justify-content: flex-start;
+  }
+  .footer-col {
+    flex: 1 1 calc(50% - var(--space-lg) / 2);
+    min-width: 160px;
   }
 }
 @media (max-width: 600px) {
-  .footer-content {
-    grid-template-columns: 1fr;
+  .footer-col {
+    flex: 1 1 100%;
   }
 }
 .footer-col {
-  text-align: center;
+  text-align: justify;
+  flex: 1 1 0;
+  min-width: 140px;
 }
 .footer-col-title {
   font-size: 1rem;
@@ -262,19 +259,21 @@ function scrollToTop() {
   color: var(--cream);
   margin: 0 0 var(--space-sm) 0;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid var(--leaf-green);
+  border-bottom: 3px solid var(--accent);
   display: inline-block;
+  text-align: left;
 }
 .footer-brand {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--cream);
   margin: 0 0 var(--space-md) 0;
+  text-align: left;
 }
 .footer-address,
 .footer-contact {
   font-size: 0.9rem;
-  color: var(--earth-400);
+  color: rgba(255, 255, 255, 0.85);
   margin: 0 0 0.5rem 0;
   line-height: 1.5;
 }
@@ -290,22 +289,24 @@ function scrollToTop() {
   margin-bottom: 0.5rem;
 }
 .footer-list a {
-  color: var(--earth-400);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.2s;
 }
 .footer-list a:hover {
-  color: var(--leaf-green);
+  color: var(--accent);
 }
 .footer-list li::before {
   content: '› ';
-  color: var(--leaf-green);
+  color: var(--accent);
   font-weight: 700;
   margin-right: 0.25rem;
 }
 .footer-company {
-  text-align: center;
+  text-align: justify;
+  flex: 1.2 1 0;
+  min-width: 180px;
 }
 .social-icon {
   flex-shrink: 0;
@@ -316,22 +317,22 @@ function scrollToTop() {
 
 /* 3. Bottom bar */
 .footer-bottom {
-  background: var(--earth-800);
+  background: var(--primary-dark);
   padding: var(--space-md) 0;
-  border-top: 1px solid var(--earth-700);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
 }
 .footer-bottom-inner {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: var(--space-xl);
   flex-wrap: wrap;
 }
 .footer-copyright p {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--earth-400);
+  color: rgba(255, 255, 255, 0.8);
 }
 .footer-copyright strong {
   color: var(--cream);
@@ -351,8 +352,8 @@ function scrollToTop() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--leaf-green);
-  color: white;
+  background: var(--accent);
+  color: var(--text);
   border-radius: var(--border-radius);
   text-decoration: none;
   font-size: 0.9rem;
@@ -360,28 +361,6 @@ function scrollToTop() {
   transition: background 0.2s;
 }
 .social-icon:hover {
-  background: var(--deep-forest);
-}
-.scroll-to-top {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--leaf-green);
-  color: white;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
-.scroll-to-top:hover {
-  background: var(--deep-forest);
-}
-.scroll-to-top:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.5);
+  background: var(--accent-dark);
 }
 </style>

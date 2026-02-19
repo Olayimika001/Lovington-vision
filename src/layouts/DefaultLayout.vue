@@ -7,6 +7,7 @@
     </main>
     <Footer />
     <CartSidebar />
+    <ScrollToTop />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import { useI18n } from 'vue-i18n'
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
 import CartSidebar from '@/components/CartSidebar.vue'
+import ScrollToTop from '@/components/ScrollToTop.vue'
 
 const { t } = useI18n()
 </script>
@@ -32,7 +34,7 @@ const { t } = useI18n()
   left: var(--space-md);
   z-index: 9999;
   padding: 0.75rem 1.25rem;
-  background: var(--leaf-green);
+  background: var(--primary);
   color: var(--cream);
   font-weight: 600;
   border-radius: var(--border-radius);

@@ -87,6 +87,7 @@ function addToCart() {
   min-height: 0;
   overflow: hidden;
   background: var(--sand);
+  flex-shrink: 0;
 }
 .product-img {
   width: 100%;
@@ -94,6 +95,12 @@ function addToCart() {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+@media (max-width: 768px) {
+  .product-image { min-height: 260px; }
+}
+@media (max-width: 480px) {
+  .product-image { min-height: 280px; }
 }
 .placeholder-image {
   width: 100%;

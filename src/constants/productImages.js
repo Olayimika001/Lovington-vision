@@ -1,10 +1,13 @@
 /**
  * Product images from /public/images. Paths with spaces are URL-encoded.
+ * Uses BASE_URL so images work on mobile and when deployed to a subpath (e.g. GitHub Pages).
  * Add herbs.jpg and palm-oil.jpg to /public/images when you have them (Bitter Leaf, Palm Oil).
  */
 function local(path) {
-  const full = path.startsWith('/') ? path : `/images/${path}`
-  return encodeURI(full)
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
+  const segment = path.startsWith('/') ? path.slice(1) : path
+  const full = `${base}/images/${segment}`
+  return full.split('/').map((part, i) => (i === 0 ? part : encodeURIComponent(part))).join('/')
 }
 
 export const productImages = {

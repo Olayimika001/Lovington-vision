@@ -156,6 +156,7 @@ const currentCategoryNameYo = computed(() => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--space-lg);
+  min-width: 0;
 }
 
 /* Empty state */
@@ -177,6 +178,12 @@ const currentCategoryNameYo = computed(() => {
   .category-nav { flex-direction: row; flex-wrap: wrap; }
   .category-btn { width: auto; padding: 0.5rem 1rem; font-size: 0.9375rem; border-left: none; border-bottom: 3px solid transparent; }
   .category-btn.active { border-left: none; border-bottom-color: var(--primary); }
-  .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-md); }
+  .products-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+}
+@media (max-width: 480px) {
+  .shop-main { padding: var(--space-md) 0; }
+  .shop-layout { padding: 0 var(--space-sm); gap: var(--space-md); }
+  .products-grid { gap: var(--space-sm); }
+  .products-heading { font-size: 1.25rem; }
 }
 </style>

@@ -234,6 +234,17 @@ function submitNewsletter() {
   gap: var(--space-lg);
   align-items: start;
 }
+@media (max-width: 480px) {
+  .footer-newsletter-strip {
+    padding: var(--space-lg) 0;
+  }
+  .footer-main {
+    padding: var(--space-lg) 0;
+  }
+  .footer-content {
+    gap: var(--space-md);
+  }
+}
 @media (max-width: 1024px) {
   .footer-content {
     justify-content: flex-start;
@@ -246,6 +257,13 @@ function submitNewsletter() {
 @media (max-width: 600px) {
   .footer-col {
     flex: 1 1 100%;
+    text-align: left;
+  }
+  .footer-company {
+    text-align: left;
+  }
+  .footer-col-title {
+    text-align: left;
   }
 }
 .footer-col {
@@ -328,6 +346,19 @@ function submitNewsletter() {
   justify-content: space-between;
   gap: var(--space-xl);
   flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .footer-bottom-inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-md);
+  }
+  .footer-copyright p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
 }
 .footer-copyright p {
   margin: 0;

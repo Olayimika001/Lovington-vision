@@ -1,0 +1,193 @@
+/**
+ * Global styles: Tailwind base/components/utilities plus project design tokens.
+ * Use Tailwind classes for layout (flex, grid, container), spacing, responsive.
+ * This file keeps: CSS variables, typography, .btn, .card, animations, focus rings.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --earth-900: #0f172a;
+  --earth-800: #1e293b;
+  --earth-700: #334155;
+  --earth-600: #64748b;
+  --earth-500: #94a3b8;
+  --earth-400: #cbd5e1;
+  --harvest-gold: #f59e0b;
+  --leaf-green: #059669;
+  --deep-forest: #047857;
+  --clay-terracotta: #dc2626;
+  --sky-blue: #0ea5e9;
+  --cream: #ffffff;
+  --warm-white: #f8fafc;
+  --sand: #f1f5f9;
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-strong: 0 10px 40px rgba(15, 23, 42, 0.1);
+  --border-radius: 8px;
+  --focus-ring: 0 0 0 3px rgba(5, 150, 105, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--warm-white);
+  color: var(--earth-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--earth-900);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(1.875rem, 4vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-slide { animation: fadeSlideUp 0.8s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: var(--leaf-green);
+  color: var(--cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  background: var(--deep-forest);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn:focus-visible, button:focus-visible, a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none;
+  border-color: var(--leaf-green);
+  box-shadow: var(--focus-ring);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--earth-800);
+  border: 2px solid var(--earth-600);
+}
+
+.btn-secondary:hover {
+  background: var(--earth-800);
+  color: var(--cream);
+  border-color: var(--earth-800);
+}
+
+.btn-accent {
+  background: var(--clay-terracotta);
+  color: var(--cream);
+}
+
+.btn-accent:hover {
+  background: #a84d2f;
+  transform: translateY(-2px);
+}
+
+.card {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-4px);
+}
+
+.divider-leaf {
+  width: 48px;
+  height: 3px;
+  background: var(--leaf-green);
+  margin: var(--space-md) 0;
+  border-radius: 2px;
+}
+
+.page-header {
+  background: var(--sand);
+  padding: var(--space-xl) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--earth-400);
+}
+
+.page-header h1 { margin: 0 0 var(--space-sm) 0; }
+.page-header p { margin: 0; font-size: 1.125rem; color: var(--earth-600); }
+
+@media (max-width: 768px) {
+  :root { --space-lg: 2rem; --space-xl: 3rem; }
+  .container { padding: 0 var(--space-sm); }
+}
+
+@media (max-width: 480px) {
+  :root { --space-md: 1.25rem; --space-lg: 1.5rem; --space-xl: 2.5rem; }
+  .container { padding: 0 var(--space-xs); }
+}

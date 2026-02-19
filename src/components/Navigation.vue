@@ -244,6 +244,7 @@ function closeMobileMenu() {
 }
 
 @media (max-width: 992px) {
+  .language-switcher { display: none; }
   .nav-overlay { display: block; }
   .nav-links {
     position: fixed;

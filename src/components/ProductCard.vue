@@ -9,7 +9,9 @@
         loading="lazy"
         @error="imageError = true"
       />
-      <div v-if="!product.image || imageError" class="placeholder-image">{{ product.icon || '🌱' }}</div>
+      <div v-if="!product.image || imageError" class="placeholder-image" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
       <span v-if="!product.inStock" class="out-of-stock-badge">{{ t('shop.outOfStock') }}</span>
     </div>
     <div class="product-info">
@@ -77,12 +79,35 @@ function addToCart() {
   flex-direction: column;
 }
 .product-card:hover { box-shadow: var(--shadow-strong); transform: translateY(-8px); }
-.product-image { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; background: var(--sand); }
-.product-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--sand);
+}
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 .placeholder-image {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
   background: linear-gradient(135deg, var(--sand), var(--accent));
-  display: flex; align-items: center; justify-content: center; font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+.placeholder-image svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.7;
 }
 .out-of-stock-badge {
   position: absolute; top: 1rem; right: 1rem;
@@ -151,5 +176,9 @@ function addToCart() {
   .product-footer { flex-direction: column; align-items: stretch; gap: 0.75rem; }
   .price-section { flex-direction: row; align-items: baseline; gap: 0.35rem; }
   .add-to-cart { width: 100%; }
+}
+@media (max-width: 360px) {
+  .placeholder-image { min-height: 100px; }
+  .placeholder-image svg { width: 40px; height: 40px; }
 }
 </style>

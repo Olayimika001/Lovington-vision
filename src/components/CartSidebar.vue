@@ -22,7 +22,9 @@
                   class="item-img"
                   @error="imageErrors[item.id] = true"
                 />
-                <div v-else class="placeholder-image">{{ item.icon || '🌱' }}</div>
+                <div v-else class="placeholder-image" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                </div>
               </div>
               <div class="item-details">
                 <h4>{{ locale === 'yo' ? item.nameYo : item.name }}</h4>
@@ -74,9 +76,10 @@ const imageErrors = reactive({})
 .cart-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .cart-items { flex: 1; overflow-y: auto; padding: var(--space-md); }
 .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1rem; padding: 1rem; background: white; border-radius: var(--border-radius); margin-bottom: 1rem; box-shadow: var(--shadow-soft); }
-.item-image { width: 80px; height: 80px; border-radius: var(--border-radius); overflow: hidden; background: var(--sand); flex-shrink: 0; }
-.item-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.placeholder-image { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sand), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+.item-image { width: 80px; min-width: 64px; height: 80px; min-height: 64px; border-radius: var(--border-radius); overflow: hidden; background: var(--sand); flex-shrink: 0; }
+.item-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.placeholder-image { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sand), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+.placeholder-image svg { width: 32px; height: 32px; opacity: 0.7; }
 .item-details h4 { font-size: 1rem; margin: 0 0 0.25rem 0; }
 .item-price { color: var(--earth-600); font-size: 0.95rem; margin: 0 0 0.5rem 0; }
 .quantity-controls { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
@@ -93,4 +96,9 @@ const imageErrors = reactive({})
 .slide-enter-from .cart-overlay, .slide-leave-to .cart-overlay { opacity: 0; }
 .slide-enter-from .cart-panel, .slide-leave-to .cart-panel { transform: translateX(100%); }
 @media (max-width: 768px) { .cart-panel { max-width: 100%; } }
+@media (max-width: 480px) {
+  .cart-item { grid-template-columns: 64px 1fr auto; gap: 0.75rem; padding: 0.75rem; }
+  .item-image { width: 64px; height: 64px; min-width: 56px; min-height: 56px; }
+  .placeholder-image svg { width: 28px; height: 28px; }
+}
 </style>

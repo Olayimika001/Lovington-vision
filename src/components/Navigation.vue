@@ -265,4 +265,14 @@ function closeMobileMenu() {
   .cart-btn { min-width: 40px; min-height: 40px; padding: 0.5rem; }
   .mobile-toggle { min-width: 40px; min-height: 40px; }
 }
+
+@media (max-width: 360px) {
+  .nav-content { padding: 0.5rem var(--space-xs); gap: 0.25rem; min-height: 52px; }
+  .nav-links { top: 52px; max-height: calc(100vh - 52px); }
+  .logo-main { font-size: 1rem; }
+  .currency-switcher { display: none; }
+  .lang-btn { min-width: 36px; min-height: 36px; padding: 0.35rem; font-size: 0.8rem; }
+  .cart-btn { min-width: 36px; min-height: 36px; padding: 0.4rem; font-size: 1rem; }
+  .mobile-toggle { min-width: 36px; min-height: 36px; }
+}
 </style>

@@ -123,7 +123,7 @@ const featuredProducts = computed(() => getProductsByCategory('all').slice(0, 4)
 .land-underline::before { content: ''; width: 60px; height: 4px; background: var(--deep-forest); border-radius: 2px; }
 .land-underline::after { content: ''; width: 60px; height: 4px; background: #c4a574; border-radius: 2px; }
 .land-intro { max-width: 720px; margin: 0 auto var(--space-xl); text-align: center; color: var(--earth-700); font-size: 1rem; line-height: 1.65; }
-.land-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); max-width: 900px; margin: 0 auto; }
+.land-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: var(--space-lg); max-width: 900px; margin: 0 auto; }
 .land-card { background: white; padding: var(--space-lg); border-radius: var(--border-radius); box-shadow: var(--shadow-soft); border: 1px solid rgba(15,23,42,0.06); }
 .land-card-icon { width: 52px; height: 52px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md); color: white; }
 .land-card-icon--green { background: var(--deep-forest); }
@@ -134,7 +134,7 @@ const featuredProducts = computed(() => getProductsByCategory('all').slice(0, 4)
 .featured-products, .values-section { padding: var(--space-xl) 0; }
 .section-title { text-align: center; margin-bottom: var(--space-sm); }
 .section-subtitle { text-align: center; color: var(--earth-600); margin-bottom: var(--space-lg); }
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: var(--space-lg); margin-bottom: var(--space-lg); }
 .cta-center { text-align: center; }
 .consultation-teaser {
   position: relative;
@@ -150,7 +150,7 @@ const featuredProducts = computed(() => getProductsByCategory('all').slice(0, 4)
 }
 .consultation-teaser-inner { position: relative; z-index: 1; }
 .teaser-content { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); flex-wrap: wrap; }
-.teaser-text { flex: 1; min-width: 280px; color: white; }
+.teaser-text { flex: 1 1 280px; min-width: 0; color: white; }
 .teaser-text h2 { color: white; margin-bottom: var(--space-sm); }
 .teaser-text p { color: rgba(255, 255, 255, 0.92); margin: 0 0 var(--space-sm); }
 .teaser-description { color: rgba(255, 255, 255, 0.9); margin: var(--space-sm) 0 var(--space-md); line-height: 1.6; }

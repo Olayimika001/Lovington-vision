@@ -135,7 +135,8 @@ function scrollToTop() {
 }
 .newsletter-text {
   flex: 0 1 auto;
-  min-width: 280px;
+  min-width: 0;
+  max-width: 100%;
 }
 .newsletter-title {
   font-size: 1.5rem;
@@ -168,7 +169,7 @@ function scrollToTop() {
   border-right: none;
   border-radius: var(--border-radius) 0 0 var(--border-radius);
   font-size: 1rem;
-  min-width: 380px;
+  min-width: 0;
   width: 100%;
   max-width: 420px;
   font-family: inherit;
@@ -198,6 +199,11 @@ function scrollToTop() {
   font-weight: 600;
   margin: 0;
 }
+@media (min-width: 769px) {
+  .newsletter-text { min-width: 280px; }
+  .newsletter-input { min-width: 280px; }
+}
+
 @media (max-width: 768px) {
   .newsletter-inner {
     flex-direction: column;

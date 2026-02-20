@@ -33,6 +33,24 @@
         </article>
       </div>
 
+      <section class="interpreter-section" aria-labelledby="interpreter-heading">
+        <h2 id="interpreter-heading" class="visually-hidden">{{ t('about.interpreterTitle') }}</h2>
+        <figure class="interpreter-figure">
+          <img
+            :src="aboutImageSrc"
+            alt=""
+            class="interpreter-image"
+            width="1200"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption class="interpreter-caption">
+            <h3 class="interpreter-caption-title">{{ t('about.interpreterTitle') }}</h3>
+            <p class="interpreter-caption-desc">{{ t('about.interpreterDesc') }}</p>
+          </figcaption>
+        </figure>
+      </section>
+
       <section class="values-section" aria-labelledby="values-heading">
         <h2 id="values-heading" class="values-heading">{{ t('about.values') }}</h2>
         <div class="values-grid">
@@ -48,11 +66,15 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageHero from '@/components/PageHero.vue'
 import { heroImages } from '@/constants/heroImages'
 
 const { t } = useI18n()
+
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
+const aboutImageSrc = computed(() => `${base}/images/about_image.jpeg`)
 
 const values = [
   { icon: '🌱', titleKey: 'values.sustainable', descKey: 'values.sustainableDesc' },
@@ -112,6 +134,56 @@ const values = [
 
 .about-card-body p:last-child {
   margin-bottom: 0;
+}
+
+/* Interpreter section - before Our Values */
+.interpreter-section {
+  margin-bottom: var(--space-xl);
+}
+.interpreter-figure {
+  margin: 0;
+  background: var(--cream);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(45, 106, 79, 0.1);
+}
+.interpreter-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  max-height: 480px;
+}
+.interpreter-caption {
+  padding: var(--space-lg);
+  text-align: left;
+}
+.interpreter-caption-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.3;
+}
+.interpreter-caption-desc {
+  font-size: clamp(0.9375rem, 1.2vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Values section */
@@ -198,6 +270,14 @@ const values = [
     padding: var(--space-md);
   }
 
+  .interpreter-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .interpreter-caption {
+    padding: var(--space-md);
+  }
+
   .values-section {
     margin-top: var(--space-md);
   }
@@ -236,6 +316,18 @@ const values = [
 
   .about-card-body {
     font-size: 0.9375rem;
+  }
+
+  .interpreter-section {
+    margin-bottom: var(--space-md);
+  }
+
+  .interpreter-caption {
+    padding: var(--space-sm);
+  }
+
+  .interpreter-image {
+    max-height: 320px;
   }
 
   .values-grid {

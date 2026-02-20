@@ -29,7 +29,7 @@
         <div class="footer-col footer-company">
           <h3 class="footer-brand">{{ t('brand.name') }}</h3>
           <p class="footer-address">{{ t('contact.addressLine1') }}<br />{{ t('contact.addressLine2') }}</p>
-          <p class="footer-contact"><strong>{{ t('contact.phone') }}</strong> +234 123 456 7890</p>
+          <p class="footer-contact"><strong>{{ t('contact.phone') }}</strong> +234 802 824 0078, 0803 081 9828, 0812 743 7619</p>
           <p class="footer-contact"><strong>{{ t('contact.email') }}</strong> info@lovingtonvision.com</p>
         </div>
         <div class="footer-col">
@@ -148,15 +148,14 @@ function submitNewsletter() {
 }
 .newsletter-form {
   display: flex;
-  gap: 0;
+  gap: 0.75rem;
   align-items: stretch;
   justify-content: center;
 }
 .newsletter-input {
   padding: 0.75rem 1rem;
   border: 2px solid var(--primary);
-  border-right: none;
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: var(--border-radius);
   font-size: 1rem;
   min-width: 0;
   width: 100%;
@@ -172,11 +171,12 @@ function submitNewsletter() {
   background: var(--accent);
   color: var(--text);
   border: 2px solid var(--accent);
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-radius: var(--border-radius);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   font-family: inherit;
+  flex-shrink: 0;
   transition: background 0.2s, color 0.2s;
 }
 .btn-newsletter:hover {
@@ -198,26 +198,35 @@ function submitNewsletter() {
   .newsletter-inner {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
+    gap: var(--space-lg);
+    padding: 0 var(--space-sm);
+  }
+  .newsletter-text {
+    width: 100%;
+    max-width: 100%;
   }
   .newsletter-desc {
     max-width: none;
+  }
+  .newsletter-form-wrap {
+    width: 100%;
+    max-width: 100%;
   }
   .newsletter-form {
     flex-direction: column;
     width: 100%;
     max-width: 420px;
+    margin: 0 auto;
+    gap: 1rem;
   }
   .newsletter-input {
-    border-right: 2px solid var(--primary);
-    border-radius: var(--border-radius);
     min-width: 0;
     max-width: none;
+    width: 100%;
   }
   .btn-newsletter {
-    border-radius: var(--border-radius);
-    border-left: 2px solid var(--primary);
+    width: 100%;
   }
 }
 
@@ -234,17 +243,6 @@ function submitNewsletter() {
   gap: var(--space-lg);
   align-items: start;
 }
-@media (max-width: 480px) {
-  .footer-newsletter-strip {
-    padding: var(--space-lg) 0;
-  }
-  .footer-main {
-    padding: var(--space-lg) 0;
-  }
-  .footer-content {
-    gap: var(--space-md);
-  }
-}
 @media (max-width: 1024px) {
   .footer-content {
     justify-content: flex-start;
@@ -255,15 +253,44 @@ function submitNewsletter() {
   }
 }
 @media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xl);
+    padding: 0 var(--space-sm);
+  }
   .footer-col {
     flex: 1 1 100%;
     text-align: left;
+    min-width: 0;
   }
   .footer-company {
     text-align: left;
   }
   .footer-col-title {
     text-align: left;
+  }
+  .footer-address,
+  .footer-contact {
+    margin-bottom: 0.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .footer-newsletter-strip {
+    padding: var(--space-xl) var(--space-sm);
+  }
+  .footer-main {
+    padding: var(--space-xl) var(--space-sm);
+  }
+  .footer-content {
+    gap: var(--space-xl);
+    padding: 0;
+  }
+  .footer-bottom {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  .footer-bottom-inner {
+    gap: var(--space-lg);
   }
 }
 .footer-col {

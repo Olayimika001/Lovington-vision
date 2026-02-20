@@ -37,7 +37,7 @@
               </span>
               <div class="contact-detail-text">
                 <strong class="contact-detail-label">{{ t('contact.call') }}:</strong>
-                <span class="contact-detail-value">+234 123 456 7890</span>
+                <span class="contact-detail-value">+234 802 824 0078, 0803 081 9828, 0812 743 7619</span>
               </div>
             </div>
           </div>

@@ -35,20 +35,41 @@
 
       <section class="interpreter-section" aria-labelledby="interpreter-heading">
         <h2 id="interpreter-heading" class="visually-hidden">{{ t('about.interpreterTitle') }}</h2>
-        <figure class="interpreter-figure">
-          <img
-            :src="aboutImageSrc"
-            alt=""
-            class="interpreter-image"
-            width="1200"
-            height="800"
-            loading="lazy"
-          />
-          <figcaption class="interpreter-caption">
+        <div class="interpreter-layout">
+          <div class="interpreter-image-wrap">
+            <img
+              :src="aboutImageSrc"
+              alt=""
+              class="interpreter-image"
+              width="1200"
+              height="800"
+              loading="lazy"
+            />
+          </div>
+          <div class="interpreter-caption">
             <h3 class="interpreter-caption-title">{{ t('about.interpreterTitle') }}</h3>
             <p class="interpreter-caption-desc">{{ t('about.interpreterDesc') }}</p>
-          </figcaption>
-        </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section" aria-labelledby="profile-heading">
+        <h2 id="profile-heading" class="visually-hidden">{{ t('about.profileHeading') }}</h2>
+        <div class="profile-layout">
+          <div class="profile-image-wrap">
+            <img
+              :src="aboutImage2Src"
+              alt=""
+              class="profile-image"
+              width="1200"
+              height="800"
+              loading="lazy"
+            />
+          </div>
+          <div class="profile-caption">
+            <p class="profile-statement">{{ t('about.missionStatement') }}</p>
+          </div>
+        </div>
       </section>
 
       <section class="values-section" aria-labelledby="values-heading">
@@ -75,6 +96,7 @@ const { t } = useI18n()
 
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 const aboutImageSrc = computed(() => `${base}/images/about_image.jpeg`)
+const aboutImage2Src = computed(() => `${base}/images/about_image2.jpeg`)
 
 const values = [
   { icon: '🌱', titleKey: 'values.sustainable', descKey: 'values.sustainableDesc' },
@@ -136,29 +158,40 @@ const values = [
   margin-bottom: 0;
 }
 
-/* Interpreter section - before Our Values */
+/* Interpreter section - image and content side by side (same as profile) */
 .interpreter-section {
   margin-bottom: var(--space-xl);
 }
-.interpreter-figure {
-  margin: 0;
+.interpreter-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
   background: var(--cream);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(45, 106, 79, 0.1);
+  min-width: 0;
+}
+.interpreter-image-wrap {
+  position: relative;
+  min-height: 280px;
+  min-width: 0;
 }
 .interpreter-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  min-height: 280px;
+  max-height: 420px;
   display: block;
   object-fit: cover;
   object-position: center;
-  max-height: 480px;
 }
 .interpreter-caption {
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   text-align: left;
+  min-width: 0;
 }
 .interpreter-caption-title {
   font-family: var(--font-display);
@@ -171,7 +204,7 @@ const values = [
 .interpreter-caption-desc {
   font-size: clamp(0.9375rem, 1.2vw, 1rem);
   color: var(--text-muted);
-  line-height: 1.65;
+  line-height: 1.75;
   margin: 0;
 }
 .visually-hidden {
@@ -184,6 +217,48 @@ const values = [
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Profile / mission statement section (about_image2) - image and content side by side */
+.profile-section {
+  margin-bottom: var(--space-xl);
+}
+.profile-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  background: var(--cream);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(45, 106, 79, 0.1);
+  min-width: 0;
+}
+.profile-image-wrap {
+  position: relative;
+  min-height: 280px;
+  min-width: 0;
+}
+.profile-image {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  max-height: 420px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+.profile-caption {
+  padding: var(--space-xl);
+  text-align: left;
+  min-width: 0;
+}
+.profile-statement {
+  font-size: clamp(0.9375rem, 1.2vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
 }
 
 /* Values section */
@@ -274,8 +349,44 @@ const values = [
     margin-bottom: var(--space-lg);
   }
 
+  .interpreter-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .interpreter-image-wrap {
+    min-height: 240px;
+  }
+
+  .interpreter-image {
+    min-height: 240px;
+    max-height: 320px;
+  }
+
   .interpreter-caption {
-    padding: var(--space-md);
+    padding: var(--space-lg);
+  }
+
+  .profile-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .profile-image-wrap {
+    min-height: 240px;
+  }
+
+  .profile-image {
+    min-height: 240px;
+    max-height: 320px;
+  }
+
+  .profile-caption {
+    padding: var(--space-lg);
   }
 
   .values-section {
@@ -322,12 +433,42 @@ const values = [
     margin-bottom: var(--space-md);
   }
 
-  .interpreter-caption {
-    padding: var(--space-sm);
+  .interpreter-layout {
+    gap: 0;
+  }
+
+  .interpreter-image-wrap {
+    min-height: 200px;
   }
 
   .interpreter-image {
-    max-height: 320px;
+    min-height: 200px;
+    max-height: 280px;
+  }
+
+  .interpreter-caption {
+    padding: var(--space-md);
+  }
+
+  .profile-section {
+    margin-bottom: var(--space-md);
+  }
+
+  .profile-layout {
+    gap: 0;
+  }
+
+  .profile-image-wrap {
+    min-height: 200px;
+  }
+
+  .profile-image {
+    min-height: 200px;
+    max-height: 280px;
+  }
+
+  .profile-caption {
+    padding: var(--space-md);
   }
 
   .values-grid {

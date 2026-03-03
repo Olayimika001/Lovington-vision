@@ -22,29 +22,21 @@
       </section>
 
       <section class="consultation-section services-section" aria-labelledby="services-heading">
-        <h2 id="services-heading" class="section-heading">{{ t('consultation.services') }}</h2>
-        <div class="services-grid">
+        <h2 id="services-heading" class="section-heading">{{ t('consultation.coreServicesTitle') }}</h2>
+        <div class="core-services-list">
           <article
-            v-for="service in services"
-            :key="service.id"
-            class="service-card"
+            v-for="service in coreServices"
+            :key="service.key"
+            class="core-service-card"
           >
-            <div class="service-icon" aria-hidden="true">{{ service.icon }}</div>
-            <h3>{{ t(`consultation.${service.key}`) }}</h3>
-            <p class="service-description">{{ t(`consultation.${service.key}Desc`) }}</p>
-            <dl class="service-details">
-              <div class="detail-item">
-                <dt>{{ t('consultation.duration') }}</dt>
-                <dd>{{ service.duration }} {{ t('common.minutes') }}</dd>
-              </div>
-              <div class="detail-item">
-                <dt>{{ t('consultation.price') }}</dt>
-                <dd class="detail-price">{{ formatPrice(service.price) }}</dd>
-              </div>
-            </dl>
+            <h3 class="core-service-title">{{ t(`consultation.${service.titleKey}`) }}</h3>
+            <p v-if="service.deliveryKey" class="core-service-delivery">{{ t(`consultation.${service.deliveryKey}`) }}</p>
+            <ul class="core-service-items">
+              <li v-for="(item, idx) in serviceItems(service.itemsKey)" :key="idx">{{ item }}</li>
+            </ul>
             <button
               type="button"
-              class="btn btn-primary book-btn"
+              class="btn btn-primary core-service-book-btn"
               @click="openBookingModal(service)"
             >
               {{ t('consultation.bookSession') }}
@@ -74,7 +66,7 @@
     <Teleport to="body">
       <Transition name="modal">
         <div
-          v-if="selectedService"
+          v-if="showBookingModal"
           class="modal-overlay"
           role="dialog"
           aria-modal="true"
@@ -103,7 +95,7 @@
             </template>
             <template v-else>
               <h2 id="booking-modal-title">{{ t('consultation.bookSession') }}</h2>
-              <p class="modal-service-name">{{ t(`consultation.${selectedService.key}`) }}</p>
+              <p v-if="selectedService" class="modal-service-name">{{ t(`consultation.${selectedService.titleKey}`) }}</p>
 
               <form
                 class="booking-form"
@@ -162,7 +154,7 @@
                   <textarea id="booking-message" v-model="bookingForm.message" rows="4" placeholder=" "></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary submit-btn">
-                  {{ t('consultationForm.confirmBooking') }} – {{ formatPrice(selectedService.price) }}
+                  {{ selectedService ? `${t('consultationForm.confirmBooking')} – ${formatPrice(selectedService.price)}` : t('consultationForm.confirmBooking') }}
                 </button>
               </form>
             </template>
@@ -189,12 +181,19 @@ const localeTag = computed(() => (locale.value === 'yo' ? 'en-NG' : 'en'))
 
 const howItWorksSteps = [1, 2, 3, 4]
 
-const services = [
-  { id: 1, key: 'beginner', duration: 60, price: 25, icon: '📖' },
-  { id: 2, key: 'intermediate', duration: 60, price: 30, icon: '🌍' },
-  { id: 3, key: 'advanced', duration: 90, price: 45, icon: '✨' }
+const coreServices = [
+  { key: 'service1', titleKey: 'service1Title', deliveryKey: 'service1Delivery', itemsKey: 'service1Items' },
+  { key: 'service2', titleKey: 'service2Title', deliveryKey: null, itemsKey: 'service2Items' },
+  { key: 'service3', titleKey: 'service3Title', deliveryKey: null, itemsKey: 'service3Items' }
 ]
 
+function serviceItems(itemsKey) {
+  const text = t(`consultation.${itemsKey}`)
+  if (!text || text === itemsKey) return []
+  return text.split('\n').map((s) => s.trim()).filter(Boolean)
+}
+
+const showBookingModal = ref(false)
 const selectedService = ref(null)
 const bookingSubmitted = ref(false)
 const bookingForm = reactive({
@@ -215,9 +214,11 @@ const availableSlotsForDay = computed(() => {
 
 function openBookingModal(service) {
   selectedService.value = service
+  showBookingModal.value = true
 }
 
 function closeBookingModal() {
+  showBookingModal.value = false
   selectedService.value = null
   bookingSubmitted.value = false
   bookingForm.name = ''
@@ -339,8 +340,8 @@ function submitBooking() {
   }
 }
 
-/* Services */
-.services-grid {
+/* Core Services - 3 in a row */
+.core-services-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
@@ -348,87 +349,77 @@ function submitBooking() {
   align-items: stretch;
 }
 
-.service-card {
+.core-service-card {
   background: white;
   padding: var(--space-lg);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(15, 23, 42, 0.06);
+  text-align: left;
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  min-width: 0;
+}
+
+.core-service-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.3;
+}
+
+.core-service-delivery {
+  font-size: 0.85rem;
+  color: var(--earth-600);
+  margin: 0 0 var(--space-sm);
+  font-style: italic;
+}
+
+.core-service-items {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.core-service-items li {
+  margin-bottom: 0.35rem;
+}
+
+.core-service-items li:last-child {
+  margin-bottom: 0;
+}
+
+.core-service-book-btn {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 992px) {
-  .services-grid {
+  .core-services-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
-  .services-grid {
+  .core-services-list {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
-  .service-card {
-    min-height: auto;
+  .core-service-card {
+    padding: var(--space-md);
   }
-}
 
-.service-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
-  line-height: 1;
-}
-
-.service-card h3 {
-  margin: 0 0 var(--space-sm);
-  font-size: 1.2rem;
-  color: var(--earth-900);
-}
-
-.service-description {
-  color: var(--earth-600);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  margin: 0 0 var(--space-md);
-  flex: 1;
-}
-
-.service-details {
-  margin: 0 0 var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.detail-item dt {
-  margin: 0;
-  font-weight: 500;
-  color: var(--earth-700);
-  font-size: 0.9rem;
-}
-
-.detail-item dd {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.detail-price {
-  font-weight: 700;
-  color: var(--leaf-green);
-}
-
-.book-btn {
-  width: 100%;
-  margin-top: auto;
-  padding: 0.75rem 1rem;
+  .core-service-title {
+    font-size: 1.05rem;
+  }
 }
 
 /* Availability */

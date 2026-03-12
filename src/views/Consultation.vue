@@ -45,7 +45,7 @@
         </div>
       </section>
 
-      <section id="availability" class="consultation-section availability-section" aria-labelledby="availability-heading">
+      <!-- <section id="availability" class="consultation-section availability-section" aria-labelledby="availability-heading">
         <h2 id="availability-heading" class="section-heading">{{ t('consultation.availability') }}</h2>
         <p class="section-intro availability-timezone-note">{{ t('consultation.availabilityTimezoneNote') }}</p>
         <p v-if="availability.length === 0" class="availability-loading">{{ t('consultation.availabilityLoading') }}</p>
@@ -60,7 +60,7 @@
             <p v-if="dayOption.slots.length === 0" class="day-no-slots">{{ t('consultation.availabilityLoading') }}</p>
           </div>
         </div>
-      </section>
+      </section> -->
     </div>
 
     <Teleport to="body">

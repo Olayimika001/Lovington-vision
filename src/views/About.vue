@@ -7,28 +7,50 @@
     />
 
     <div class="container about-content">
+      <div class="about-intro">
+        <p>{{ t('about.intro1') }}</p>
+        <p>{{ t('about.intro2') }}</p>
+      </div>
+
       <div class="about-cards">
-        <article class="about-card" aria-labelledby="farm-heading">
-          <h2 id="farm-heading" class="about-card-title">{{ t('about.farmTitle') }}</h2>
+        <!-- agricultural products card -->
+        <article class="about-card" aria-labelledby="ag-products-heading">
+          <h2 id="ag-products-heading" class="about-card-title">{{ t('about.agProductsTitle') }}</h2>
           <div class="about-card-body">
-            <p>{{ t('about.farmText') }}</p>
-            <p>{{ t('about.farmText2') }}</p>
+            <p>{{ t('about.agProductsIntro') }}</p>
+            <ul class="what-list">
+              <li v-for="(item,index) in t('about.agProductsList').split('\n')" :key="index">{{ item }}</li>
+            </ul>
+            <p>{{ t('about.agProductsOutro') }}</p>
           </div>
         </article>
 
-        <article class="about-card" aria-labelledby="consult-heading">
-          <h2 id="consult-heading" class="about-card-title">{{ t('about.consultTitle') }}</h2>
-          <div class="about-card-body">
-            <p>{{ t('about.consultText') }}</p>
-            <p>{{ t('about.consultText2') }}</p>
-          </div>
-        </article>
-
+        <!-- mission card -->
         <article class="about-card" aria-labelledby="mission-heading">
           <h2 id="mission-heading" class="about-card-title">{{ t('about.missionTitle') }}</h2>
           <div class="about-card-body">
             <p>{{ t('about.missionText1') }}</p>
             <p>{{ t('about.missionText2') }}</p>
+          </div>
+        </article>
+
+        <!-- vision card -->
+        <article class="about-card" aria-labelledby="vision-heading">
+          <h2 id="vision-heading" class="about-card-title">{{ t('about.visionTitle') }}</h2>
+          <div class="about-card-body">
+            <p>{{ t('about.visionText1') }}</p>
+            <p>{{ t('about.visionText2') }}</p>
+            <p>{{ t('about.visionText3') }}</p>
+          </div>
+        </article>
+
+        <!-- what we do card -->
+        <article class="about-card" aria-labelledby="what-heading">
+          <h2 id="what-heading" class="about-card-title">{{ t('about.whatWeDoTitle') }}</h2>
+          <div class="about-card-body">
+            <ul class="what-list">
+              <li v-for="(item, index) in t('about.whatWeDoItems').split('\n')" :key="index">{{ item }}</li>
+            </ul>
           </div>
         </article>
       </div>
@@ -72,16 +94,7 @@
         </div>
       </section>
 
-      <section class="values-section" aria-labelledby="values-heading">
-        <h2 id="values-heading" class="values-heading">{{ t('about.values') }}</h2>
-        <div class="values-grid">
-          <article class="value-card" v-for="value in values" :key="value.titleKey">
-            <div class="value-icon" aria-hidden="true">{{ value.icon }}</div>
-            <h3>{{ t(value.titleKey) }}</h3>
-            <p>{{ t(value.descKey) }}</p>
-          </article>
-        </div>
-      </section>
+
     </div>
   </div>
 </template>
@@ -98,12 +111,6 @@ const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 const aboutImageSrc = computed(() => `${base}/images/about_image.jpeg`)
 const aboutImage2Src = computed(() => `${base}/images/about_image2.jpeg`)
 
-const values = [
-  { icon: '🌱', titleKey: 'values.sustainable', descKey: 'values.sustainableDesc' },
-  { icon: '🤝', titleKey: 'values.community', descKey: 'values.communityDesc' },
-  { icon: '✨', titleKey: 'values.quality', descKey: 'values.qualityDesc' },
-  { icon: '🌍', titleKey: 'values.heritage', descKey: 'values.heritageDesc' }
-]
 </script>
 
 <style scoped>
@@ -115,14 +122,45 @@ const values = [
   box-sizing: border-box;
 }
 
-/* Main content cards - spread across page */
-.about-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+.about-intro {
+  margin-bottom: var(--space-lg);
+  color: var(--earth-600);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* full width paragraphs for a more open layout */
+  max-width: none;
+}
+
+.about-section {
   margin-bottom: var(--space-xl);
 }
 
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  margin: 0 0 var(--space-md);
+}
+
+.section-body p {
+  margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+  font-size: clamp(0.9375rem, 1.2vw, 1rem);
+  line-height: 1.75;
+}
+
+/* restore card grid for key about sections */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+@media (max-width: 768px) {
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+}
 .about-card {
   background: var(--cream);
   border-radius: var(--border-radius);
@@ -131,9 +169,7 @@ const values = [
   border: 1px solid rgba(45, 106, 79, 0.1);
   display: flex;
   flex-direction: column;
-  scroll-margin-top: 5rem;
 }
-
 .about-card-title {
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 2.2vw, 1.5rem);
@@ -142,22 +178,27 @@ const values = [
   margin: 0 0 var(--space-md);
   line-height: 1.3;
 }
-
 .about-card-body {
   color: var(--text-muted);
   line-height: 1.75;
   font-size: clamp(0.9375rem, 1.2vw, 1rem);
   flex: 1;
 }
-
 .about-card-body p {
   margin: 0 0 var(--space-md);
 }
-
 .about-card-body p:last-child {
   margin-bottom: 0;
 }
 
+.what-list {
+  list-style: disc inside;
+  margin: 0;
+  padding: 0;
+}
+.what-list li {
+  margin-bottom: 0.5rem;
+}
 /* Interpreter section - image and content side by side (same as profile) */
 .interpreter-section {
   margin-bottom: var(--space-xl);

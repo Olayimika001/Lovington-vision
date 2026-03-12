@@ -28,7 +28,6 @@
               </div>
               <div class="item-details">
                 <h4>{{ locale === 'yo' ? item.nameYo : item.name }}</h4>
-                <p class="item-price">{{ formatPrice(item.price) }}</p>
                 <div class="quantity-controls">
                   <button type="button" @click="cartStore.updateQuantity(item.id, item.quantity - 1)" aria-label="Decrease">−</button>
                   <span>{{ item.quantity }}</span>
@@ -37,14 +36,10 @@
               </div>
               <div class="item-actions">
                 <button type="button" @click="cartStore.removeItem(item.id)" class="remove-btn">{{ t('cart.remove') }}</button>
-                <p class="item-total">{{ formatPrice(item.price * item.quantity) }}</p>
               </div>
             </div>
           </div>
           <div class="cart-summary">
-            <div class="summary-row"><span>{{ t('cart.subtotal') }}</span><span>{{ formatPrice(cartStore.subtotal) }}</span></div>
-            <div class="summary-row"><span>{{ t('cart.shipping') }}</span><span>{{ formatPrice(cartStore.shipping) }}</span></div>
-            <div class="summary-row total"><span>{{ t('cart.total') }}</span><span>{{ formatPrice(cartStore.total) }}</span></div>
             <RouterLink to="/checkout" class="btn btn-primary checkout-btn" @click="cartStore.toggleCart()">{{ t('cart.checkout') }}</RouterLink>
           </div>
         </div>
@@ -57,10 +52,8 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useCartStore } from '@/stores/cart'
-import { useCurrency } from '@/composables/useCurrency'
 
 const { locale, t } = useI18n()
-const { formatPrice } = useCurrency()
 const cartStore = useCartStore()
 const imageErrors = reactive({})
 </script>
@@ -81,16 +74,12 @@ const imageErrors = reactive({})
 .placeholder-image { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sand), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
 .placeholder-image svg { width: 32px; height: 32px; opacity: 0.7; }
 .item-details h4 { font-size: 1rem; margin: 0 0 0.25rem 0; }
-.item-price { color: var(--earth-600); font-size: 0.95rem; margin: 0 0 0.5rem 0; }
 .quantity-controls { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
 .quantity-controls button { width: 28px; height: 28px; border: 1px solid var(--earth-400); background: white; border-radius: var(--border-radius); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
 .quantity-controls button:hover { background: var(--primary); color: white; border-color: var(--primary); }
 .item-actions { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; }
 .remove-btn { background: none; border: none; color: var(--secondary); cursor: pointer; font-size: 0.85rem; text-decoration: underline; padding: 0; }
-.item-total { font-weight: 700; font-size: 1.1rem; }
 .cart-summary { padding: var(--space-md); background: white; border-top: 1px solid rgba(15,23,42,0.08); }
-.summary-row { display: flex; justify-content: space-between; padding: 0.75rem 0; }
-.summary-row.total { border-top: 2px solid var(--earth-600); margin-top: 0.5rem; padding-top: 1rem; font-weight: 700; font-size: 1.25rem; }
 .checkout-btn { display: block; width: 100%; margin-top: 1rem; padding: 1rem; text-align: center; text-decoration: none; color: inherit; }
 .slide-enter-active, .slide-leave-active { transition: all 0.3s ease; }
 .slide-enter-from .cart-overlay, .slide-leave-to .cart-overlay { opacity: 0; }

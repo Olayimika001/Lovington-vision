@@ -154,7 +154,7 @@
                   <textarea id="booking-message" v-model="bookingForm.message" rows="4" placeholder=" "></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary submit-btn">
-                  {{ selectedService ? `${t('consultationForm.confirmBooking')} – ${formatPrice(selectedService.price)}` : t('consultationForm.confirmBooking') }}
+                  {{ t('consultationForm.confirmBooking') }}
                 </button>
               </form>
             </template>
@@ -168,13 +168,11 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useCurrency } from '@/composables/useCurrency'
 import { useConsultation } from '@/composables/useConsultation'
 import PageHero from '@/components/PageHero.vue'
 import { heroImages } from '@/constants/heroImages'
 
 const { locale, t } = useI18n()
-const { formatPrice } = useCurrency()
 const { availability, formatSlotLabel } = useConsultation()
 
 const localeTag = computed(() => (locale.value === 'yo' ? 'en-NG' : 'en'))

@@ -28,9 +28,21 @@
       <div class="container footer-content">
         <div class="footer-col footer-company">
           <h3 class="footer-brand">{{ t('brand.name') }}</h3>
-          <p class="footer-address">{{ t('contact.addressLine1') }}<br />{{ t('contact.addressLine2') }}</p>
-          <p class="footer-contact"><strong>{{ t('contact.phone') }}</strong> +234 802 824 0078, 0803 081 9828, 0812 743 7619</p>
-          <p class="footer-contact"><strong>{{ t('contact.email') }}</strong> info@lovingtonvision.com</p>
+          <div class="footer-address-block">
+            <h4 class="footer-contact-title">{{ t('contact.location') }}</h4>
+            <p class="footer-address">{{ t('contact.addressLine1') }}<br />{{ t('contact.addressLine2') }}</p>
+            <p class="footer-address">{{ t('contact.diasporaAddress') }}</p>
+          </div>
+          <div class="footer-phone-block">
+            <h4 class="footer-contact-title">{{ t('contact.call') }}</h4>
+            <!-- <p class="footer-contact">+234 802 824 0078, 0803 081 9828, 0812 743 7619</p> -->
+            <p class="footer-contact">{{ t('contact.diasporaPhone') }}</p>
+          </div>
+          <div class="footer-email-block">
+            <h4 class="footer-contact-title">{{ t('contact.email') }}</h4>
+            <!-- <p class="footer-contact">info@lovingtonvision.com</p> -->
+            <p class="footer-contact">{{ t('contact.diasporaEmails') }}</p>
+          </div>
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">{{ t('footer.usefulLinks') }}</h4>
@@ -113,7 +125,28 @@ function submitNewsletter() {
   border-top: 1px solid rgba(45, 106, 79, 0.15);
   padding: var(--space-xl) 0;
 }
-.newsletter-inner {
+
+.footer-company .footer-contact-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: var(--space-sm) 0 0.25rem;
+  color: var(--text);
+}
+.footer-address-block,
+.footer-phone-block,
+.footer-email-block {
+  margin-bottom: var(--space-md);
+}
+.footer-address {
+  margin: 0; /* keep lines compact */
+  color: var(--earth-600);
+  font-size: 0.9rem;
+}
+.footer-contact {
+  margin: 0;
+  color: var(--earth-600);
+  font-size: 0.9rem;
+}.newsletter-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;

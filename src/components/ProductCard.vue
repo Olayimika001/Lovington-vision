@@ -18,10 +18,6 @@
       <h3>{{ locale === 'yo' ? product.nameYo : product.name }}</h3>
       <p class="product-description">{{ locale === 'yo' ? product.descriptionYo : product.description }}</p>
       <div class="product-footer">
-        <div class="price-section">
-          <span class="price">{{ formatPrice(product.price) }}</span>
-          <span class="unit">{{ unitLabel }}</span>
-        </div>
         <button type="button" @click="addToCart" :disabled="!product.inStock" class="btn btn-primary add-to-cart">
           {{ product.inStock ? t('shop.addToCart') : t('shop.outOfStock') }}
         </button>
@@ -31,10 +27,9 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useCartStore } from '@/stores/cart'
-import { useCurrency } from '@/composables/useCurrency'
 
 const props = defineProps({
   product: { type: Object, required: true }
@@ -43,14 +38,7 @@ const props = defineProps({
 const { locale, t } = useI18n()
 const imageError = ref(false)
 watch(() => props.product.id, () => { imageError.value = false })
-const { formatPrice } = useCurrency()
 const cartStore = useCartStore()
-
-const unitLabel = computed(() => {
-  const u = props.product.unit || 'kg'
-  const key = u === 'bunch' ? 'common.perBunch' : u === 'liter' ? 'common.perLiter' : 'common.perKg'
-  return t(key)
-})
 
 function addToCart() {
   if (props.product.inStock) {
@@ -153,25 +141,7 @@ function addToCart() {
   margin-top: auto;
   flex-wrap: wrap;
 }
-.price-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-  flex-shrink: 0;
-}
-.price {
-  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
-  font-weight: 700;
-  color: var(--primary);
-  letter-spacing: -0.02em;
-  word-break: break-word;
-  line-height: 1.2;
-}
-.unit {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
+
 .add-to-cart {
   padding: 0.6rem 1rem;
   font-size: 0.875rem;

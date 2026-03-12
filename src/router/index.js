@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 
 const DEFAULT_TITLE = 'Lovington Vision Int. Ltd — Yoruba Language Consulting & Sustainable Agriculture'
 
@@ -15,7 +15,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // use hash mode on static hosts like GitHub Pages to avoid 404s
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior() {
     return { top: 0 }

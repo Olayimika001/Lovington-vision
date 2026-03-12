@@ -19,7 +19,7 @@
               <div class="contact-detail-text">
                 <strong class="contact-detail-label">{{ t('contact.location') }}:</strong>
                 <span class="contact-detail-value">{{ t('contact.addressFull') }}</span>
-                <span class="contact-detail-value">{{ t('contact.diasporaAddress') }}</span>
+                <span class="contact-detail-value">{{ t('contact.diasporaAddress') || '' }}</span>
               </div>
             </div>
             <div class="contact-detail-divider" aria-hidden="true"></div>
@@ -31,7 +31,7 @@
               <div class="contact-detail-text">
                 <strong class="contact-detail-label">{{ t('contact.call') }}:</strong>
                 <!-- <span class="contact-detail-value">+234 802 824 0078, 0803 081 9828, 0812 743 7619</span> -->
-                <span class="contact-detail-value">{{ t('contact.diasporaPhone') }}</span>
+                <span class="contact-detail-value">{{ t('contact.diasporaPhone') || '' }}</span>
               </div>
             </div>
             <div class="contact-detail-divider" aria-hidden="true"></div>
@@ -43,7 +43,7 @@
               <div class="contact-detail-text">
                 <strong class="contact-detail-label">{{ t('contact.email') }}:</strong>
                 <!-- <span class="contact-detail-value">info@lovingtonvision.com</span> -->
-                <span class="contact-detail-value">{{ t('contact.diasporaEmails') }}</span>
+                <span class="contact-detail-value">{{ t('contact.diasporaEmails') || '' }}</span>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@
     <section class="footer-newsletter-strip">
       <div class="container newsletter-inner">
         <div class="newsletter-text">
-          <h2 class="newsletter-title">{{ t('footer.newsletter').toUpperCase() }}</h2>
+          <h2 class="newsletter-title">{{ (t('footer.newsletter') || '').toUpperCase() }}</h2>
           <p class="newsletter-desc">{{ t('footer.newsletterDesc') }}</p>
         </div>
         <div class="newsletter-form-wrap">
@@ -31,17 +31,17 @@
           <div class="footer-address-block">
             <h4 class="footer-contact-title">{{ t('contact.location') }}</h4>
             <p class="footer-address">{{ t('contact.addressLine1') }}<br />{{ t('contact.addressLine2') }}</p>
-            <p class="footer-address">{{ t('contact.diasporaAddress') }}</p>
+            <p class="footer-address">{{ t('contact.diasporaAddress') || '' }}</p>
           </div>
           <div class="footer-phone-block">
             <h4 class="footer-contact-title">{{ t('contact.call') }}</h4>
             <!-- <p class="footer-contact">+234 802 824 0078, 0803 081 9828, 0812 743 7619</p> -->
-            <p class="footer-contact">{{ t('contact.diasporaPhone') }}</p>
+            <p class="footer-contact">{{ t('contact.diasporaPhone') || '' }}</p>
           </div>
           <div class="footer-email-block">
             <h4 class="footer-contact-title">{{ t('contact.email') }}</h4>
             <!-- <p class="footer-contact">info@lovingtonvision.com</p> -->
-            <p class="footer-contact">{{ t('contact.diasporaEmails') }}</p>
+            <p class="footer-contact">{{ t('contact.diasporaEmails') || '' }}</p>
           </div>
         </div>
         <div class="footer-col">
